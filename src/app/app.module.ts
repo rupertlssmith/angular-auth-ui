@@ -1,6 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { MdlModule } from '@angular-mdl/core';
 
 import { AppComponent } from './app.component';
 import { ArticleModule } from './article/article.module';

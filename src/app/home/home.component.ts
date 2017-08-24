@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  @ViewChild('theFirstTextfield') tf: MdlTextFieldComponent;
-
   isAuthenticated: boolean;
 
   ngOnInit() {
@@ -34,7 +32,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  login(data) {
-    console.log(data);
+  login(loginForm) {
+    console.log(loginForm);
   }
 }

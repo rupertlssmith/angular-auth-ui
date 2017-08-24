@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdlTextFieldComponent } from '@angular-mdl/core';
 
 import { UserService } from '../shared';
 
@@ -13,6 +14,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private userService: UserService
   ) {}
+
+  @ViewChild('theFirstTextfield') tf: MdlTextFieldComponent;
 
   isAuthenticated: boolean;
 
@@ -29,5 +32,9 @@ export class HomeComponent implements OnInit {
         }
       }
     );
+  }
+
+  login(data) {
+    console.log(data);
   }
 }

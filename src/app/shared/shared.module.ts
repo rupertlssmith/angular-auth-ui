@@ -29,4 +29,4 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ShowAuthedDirective
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

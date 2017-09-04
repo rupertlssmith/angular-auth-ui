@@ -18,17 +18,17 @@ export class UserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  constructor (
+  constructor(
     private apiService: ApiService,
     private http: Http
-  ) {}
+  ) { }
 
   // Try to refresh the token, if authed this will work.
   populate() {
     this.apiService.get('/refresh')
       .subscribe(
-        data => this.setAuth(data.user),
-        err => this.purgeAuth()
+      data => this.setAuth(data.user),
+      err => this.purgeAuth()
       );
   }
 
@@ -48,13 +48,13 @@ export class UserService {
 
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post('/users' + route, {user: credentials})
-    .map(
+    return this.apiService.post('/users' + route, { user: credentials })
+      .map(
       data => {
         this.setAuth(data.user);
         return data;
       }
-    );
+      );
   }
 
   getCurrentUser(): User {
@@ -64,12 +64,12 @@ export class UserService {
   // Update the user on the server (email, pass, etc)
   update(user): Observable<User> {
     return this.apiService
-    .put('/user', { user })
-    .map(data => {
-      // Update the currentUser observable
-      this.currentUserSubject.next(data.user);
-      return data.user;
-    });
+      .put('/user', { user })
+      .map(data => {
+        // Update the currentUser observable
+        this.currentUserSubject.next(data.user);
+        return data.user;
+      });
   }
 
 }

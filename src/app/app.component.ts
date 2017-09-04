@@ -7,9 +7,9 @@ import { UserService } from './shared';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  constructor (
+  constructor(
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.populate();

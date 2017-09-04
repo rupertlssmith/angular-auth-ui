@@ -9,7 +9,7 @@ export class HomeAuthResolver implements Resolve<boolean> {
   constructor(
     private router: Router,
     private userService: UserService
-  ) {}
+  ) { }
 
   resolve(
     route: ActivatedRouteSnapshot,

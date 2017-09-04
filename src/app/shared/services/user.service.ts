@@ -23,7 +23,8 @@ export class UserService {
     private http: Http
   ) { }
 
-  // Try to refresh the token, if authed this will work.
+  // Try to refresh the token, if holding a valid token already, this will provide
+  // a refreshed token. Otherwise it should come back with an unathed 401 code.
   populate() {
     this.apiService.get('/refresh')
       .subscribe(
@@ -33,6 +34,8 @@ export class UserService {
   }
 
   setAuth(user: User) {
+    console.log("setAuth: called");
+
     // Set current user data into observable
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
@@ -40,6 +43,8 @@ export class UserService {
   }
 
   purgeAuth() {
+    console.log("purgeAuth: called");
+
     // Set current user to an empty object
     this.currentUserSubject.next(new User());
     // Set auth status to false

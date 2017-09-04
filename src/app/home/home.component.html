@@ -7,10 +7,10 @@
         <div class="mdl-card__title">
           <h4 class="mdl-card__title-text">Log In</h4>
         </div>
-        <form #values="ngForm" (ngSubmit)="login(values)">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
           <div class="mdl-card__supporting-text">
-            <mdl-textfield type="text" label="Username" name="username" floating-label autofocus></mdl-textfield>
-            <mdl-textfield type="password" label="Passowrd" name="password" floating-label></mdl-textfield>
+            <mdl-textfield ngModel type="text" label="Username" name="username" floating-label autofocus></mdl-textfield>
+            <mdl-textfield ngModel type="password" label="Passowrd" name="password" floating-label></mdl-textfield>
           </div>
           <div class="mdl-card__actions">
             <div class="control-bar">

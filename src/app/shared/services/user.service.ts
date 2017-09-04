@@ -25,11 +25,25 @@ export class UserService {
 
   // Try to refresh the token, if holding a valid token already, this will provide
   // a refreshed token. Otherwise it should come back with an unathed 401 code.
-  populate() {
+  refresh() {
+    console.log("refresh: called");
+
     this.apiService.get('/refresh')
       .subscribe(
       data => this.setAuth(data.user),
       err => this.purgeAuth()
+      );
+  }
+
+  login(credentials) {
+    console.log("login: called");
+
+     this.apiService.post('/login', credentials)
+      .subscribe(
+      data => {
+        this.setAuth(data.user);
+        return data;
+      }
       );
   }
 
@@ -49,17 +63,6 @@ export class UserService {
     this.currentUserSubject.next(new User());
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
-  }
-
-  attemptAuth(type, credentials): Observable<User> {
-    const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post('/users' + route, { user: credentials })
-      .map(
-      data => {
-        this.setAuth(data.user);
-        return data;
-      }
-      );
   }
 
   getCurrentUser(): User {

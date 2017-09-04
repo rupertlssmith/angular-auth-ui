@@ -34,5 +34,6 @@ export class HomeComponent implements OnInit {
 
   login(loginForm) {
     console.log(loginForm);
+    this.userService.login(loginForm);
   }
 }

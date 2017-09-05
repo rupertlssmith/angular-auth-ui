@@ -58,9 +58,15 @@ const init: Auth = {
 
 // Selector functions on the model.
 
-export const getAuthState = (state): Auth => state.authState;
+const getAuth = (appState): Auth => appState.auth;
 
-export const isLoggedIn = (state): Auth => state.authState.loggedIn;
+const getAuthState = createSelector(
+  getAuth,
+  (auth: Auth) => auth.authState);
+
+export const isLoggedIn = createSelector(
+  getAuthState,
+  (authState: AuthState) => authState.loggedIn);
 
 // Actions that can update the state.
 export const NOT_AUTHED = 'Not Authed';

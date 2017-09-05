@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     console.log("updateState: called");
 
     const state = this.store.getState();
-    //this.isLoggedIn = Auth.isLoggedIn(state);
+    this.isLoggedIn = Auth.isLoggedIn(state);
 
     if (this.isLoggedIn) {
       console.log("authenticated");

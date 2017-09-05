@@ -14,7 +14,8 @@ export class AuthService {
   ) { }
 
   // Try to refresh the token, if holding a valid token already, this will provide
-  // a refreshed token. Otherwise it should come back with an unathed 401 code.
+  // a refreshed token (and refresh token). Otherwise it should come back with an
+  // unauthed 401 code.
   refresh() {
     console.log("AuthService refresh: called");
 
@@ -25,6 +26,9 @@ export class AuthService {
       );
   }
 
+  // Try to log in with username/password credentials. If these are valid, this
+  // will provide a new token (and refresh token). Otherwise it should come back
+  // with an unauthed 401 code.
   login(credentials) {
     console.log("AuthService login: called");
 

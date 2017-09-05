@@ -37,8 +37,6 @@ export class HomeComponent implements OnInit {
     } else {
       console.log("not authenticated")
     }
-
-    //console.log(Auth.isLoggedIn(state));
   }
 
   ngOnInit() {

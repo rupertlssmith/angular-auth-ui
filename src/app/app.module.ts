@@ -15,6 +15,8 @@ import {
   UserService
 } from './shared';
 
+import {  AppStore,  appStoreProviders} from './app.store';
+
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
 
 @NgModule({
@@ -33,7 +35,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     ApiService,
     AuthGuard,
     JwtService,
-    UserService
+    UserService,
+    appStoreProviders
   ],
   bootstrap: [AppComponent]
 })

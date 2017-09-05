@@ -7,16 +7,15 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ApiService } from './api.service';
-import { User } from '../models';
-
+import { Token } from '../models/auth.model';
 
 @Injectable()
 export class UserService {
-  private currentUserSubject = new BehaviorSubject<User>(new User());
-  public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
-
-  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+  // private currentUserSubject = new BehaviorSubject<User>(new User());
+  // public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
+  //
+  // private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+  // public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
   constructor(
     private apiService: ApiService,
@@ -30,7 +29,7 @@ export class UserService {
 
     this.apiService.get('/refresh')
       .subscribe(
-      data => this.setAuth(data.user),
+      data => this.setAuth(data.token),
       err => this.purgeAuth()
       );
   }
@@ -47,37 +46,29 @@ export class UserService {
       );
   }
 
-  setAuth(user: User) {
+  setAuth(token: Token) {
     console.log("setAuth: called");
-
-    // Set current user data into observable
-    this.currentUserSubject.next(user);
-    // Set isAuthenticated to true
-    this.isAuthenticatedSubject.next(true);
+    // this.currentUserSubject.next(user);
+    // this.isAuthenticatedSubject.next(true);
   }
 
   purgeAuth() {
     console.log("purgeAuth: called");
-
-    // Set current user to an empty object
-    this.currentUserSubject.next(new User());
-    // Set auth status to false
-    this.isAuthenticatedSubject.next(false);
+    //this.currentUserSubject.next(new User());
+    //this.isAuthenticatedSubject.next(false);
   }
 
-  getCurrentUser(): User {
-    return this.currentUserSubject.value;
-  }
-
-  // Update the user on the server (email, pass, etc)
-  update(user): Observable<User> {
-    return this.apiService
-      .put('/user', { user })
-      .map(data => {
-        // Update the currentUser observable
-        this.currentUserSubject.next(data.user);
-        return data.user;
-      });
-  }
+  // getCurrentUser(): User {
+  //   return this.currentUserSubject.value;
+  // }
+  //
+  // update(user): Observable<User> {
+  //   return this.apiService
+  //     .put('/user', { user })
+  //     .map(data => {
+  //       this.currentUserSubject.next(data.user);
+  //       return data.user;
+  //     });
+  // }
 
 }

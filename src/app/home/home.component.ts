@@ -7,6 +7,7 @@ import { AppStore } from '../app.store';
 import * as Auth from '../shared/models/auth.model';
 import { AppState } from '../app.reducer';
 
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'home-page',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     @Inject(AppStore) private store: Redux.Store<AppState>,
-    private router: Router,
+    private authService: AuthService
   ) {
     console.log("HomeComponent constructor: called");
 
@@ -42,11 +43,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     console.log("HomeComponent ngOnInit: called");
-    this.store.dispatch(Auth.refresh());
+    this.authService.refresh();
   }
 
   login(loginForm) {
     console.log("HomeComponent loginForm: called");
-    this.store.dispatch(Auth.logIn(loginForm));
+    this.authService.login(loginForm);
   }
 }

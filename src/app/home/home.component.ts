@@ -39,8 +39,6 @@ export class HomeComponent /*implements OnInit*/ {
     console.log(isLoggedIn);
   }
 
-
-
   // ngOnInit() {
   //   this.userService.isAuthenticated.subscribe(
   //     (authenticated) => {

@@ -20,8 +20,8 @@ export class AuthService {
 
     this.apiService.get('/refresh')
       .subscribe(
-      data => this.setAuth(data.token),
-      err => this.purgeAuth()
+      data => this.newToken(data.token),
+      err => this.clearAuthState()
       );
   }
 
@@ -31,20 +31,22 @@ export class AuthService {
      this.apiService.post('/login', credentials)
       .subscribe(
       data => {
-        this.setAuth(data.token);
+        this.newToken(data.token);
         return data;
       }
       );
   }
 
-  setAuth(token: string) {
+  newToken(token: string) {
     console.log("AuthService setAuth: called");
     console.log(token);
 
     this.store.dispatch(Auth.newToken(token));
   }
 
-  purgeAuth() {
-    console.log("AuthService purgeAuth: called");
+  clearAuthState() {
+    console.log("AuthService clearAuthState: called");
+
+    this.store.dispatch(Auth.notAuthed());
   }
 }

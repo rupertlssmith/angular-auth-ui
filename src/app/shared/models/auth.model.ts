@@ -1,7 +1,5 @@
 import { Action, ActionCreator } from 'redux';
 
-import { Token } from './token.model';
-
 // The Auth state.
 
 export class Auth {
@@ -22,11 +20,21 @@ export class AuthState {
   username: string;
 }
 
-// Credentials.
+// Other data models needed.
 
 export class Credentials {
   username: string;
   password: string;
+}
+
+export class Token {
+  sub: string;
+  iss?: string;
+  aud?: string;
+  exp?: Date;
+  iat?: Date;
+  jti?: string;
+  scopes: string[];
 }
 
 // Initial state.
@@ -36,7 +44,12 @@ const init: Auth = {
   decodedToken: null,
   refreshFrom: null,
   errorMsg: "",
-  authState: null,
+  authState: {
+    loggedIn: false,
+    permissions: [],
+    expiresAt: null,
+    username: ""
+  },
   forwardLocation: "",
   logoutLocation: "",
   logonAttempted: false

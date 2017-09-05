@@ -1,25 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Injectable, Inject } from '@angular/core';
+import * as Redux from 'redux';
+import { AppState } from '../../app.reducer';
 
 import { ApiService } from './api.service';
-import { Token } from '../models/auth.model';
+import * as Auth from '../models/auth.model';
+import { AppStore } from '../../app.store';
 
 @Injectable()
 export class AuthService {
-  // private currentUserSubject = new BehaviorSubject<User>(new User());
-  // public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
-  //
-  // private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-  // public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-
   constructor(
     private apiService: ApiService,
-    private http: Http
+    @Inject(AppStore) private store: Redux.Store<AppState>
   ) { }
 
   // Try to refresh the token, if holding a valid token already, this will provide
@@ -49,27 +40,11 @@ export class AuthService {
   setAuth(token: string) {
     console.log("AuthService setAuth: called");
     console.log(token);
-    // this.currentUserSubject.next(user);
-    // this.isAuthenticatedSubject.next(true);
+
+    this.store.dispatch(Auth.newToken(token));
   }
 
   purgeAuth() {
     console.log("AuthService purgeAuth: called");
-    //this.currentUserSubject.next(new User());
-    //this.isAuthenticatedSubject.next(false);
   }
-
-  // getCurrentUser(): User {
-  //   return this.currentUserSubject.value;
-  // }
-  //
-  // update(user): Observable<User> {
-  //   return this.apiService
-  //     .put('/user', { user })
-  //     .map(data => {
-  //       this.currentUserSubject.next(data.user);
-  //       return data.user;
-  //     });
-  // }
-
 }

@@ -72,11 +72,11 @@ export const notAuthed: ActionCreator<NotAuthedAction> =
 
 export const NEW_TOKEN = 'New Token'
 export interface NewTokenAction extends Action { }
-export const refreshed: ActionCreator<NewTokenAction> =
-  () => ({
-    type: NEW_TOKEN
+export const newToken: ActionCreator<NewTokenAction> =
+  (token) => ({
+    type: NEW_TOKEN,
+    token: token
   });
-
 
 export const AuthReducer =
   function(state: Auth = init, action: Action): Auth {

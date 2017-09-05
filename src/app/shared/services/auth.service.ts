@@ -40,14 +40,15 @@ export class AuthService {
      this.apiService.post('/login', credentials)
       .subscribe(
       data => {
-        this.setAuth(data.user);
+        this.setAuth(data.token);
         return data;
       }
       );
   }
 
-  setAuth(token: Token) {
+  setAuth(token: string) {
     console.log("AuthService setAuth: called");
+    console.log(token);
     // this.currentUserSubject.next(user);
     // this.isAuthenticatedSubject.next(true);
   }

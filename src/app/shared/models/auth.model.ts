@@ -80,6 +80,10 @@ export const refreshed: ActionCreator<NewTokenAction> =
 
 export const AuthReducer =
   function(state: Auth = init, action: Action): Auth {
+    console.log("AuthReducer reduce: called");
+    console.log(state);
+    console.log(action);
+
     switch (action.type) {
       case NOT_AUTHED:
         return state;

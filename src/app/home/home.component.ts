@@ -1,8 +1,14 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdlTextFieldComponent } from '@angular-mdl/core';
+import * as Redux from 'redux';
 
 import { UserService } from '../shared';
+
+import { AppStore } from '../app.store';
+import { Auth } from '../shared/models/auth.model';
+import {AppState /*, getCurrentThread,  getCurrentUser*/} from '../app.reducer';
+
 
 @Component({
   selector: 'home-page',
@@ -11,6 +17,7 @@ import { UserService } from '../shared';
 })
 export class HomeComponent implements OnInit {
   constructor(
+    @Inject(AppStore) private store: Redux.Store<AppState>,
     private router: Router,
     private userService: UserService
   ) { }

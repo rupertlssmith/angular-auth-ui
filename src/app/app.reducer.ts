@@ -8,7 +8,7 @@ export interface AppState {
 }
 
 const rootReducer: Reducer<AppState> = combineReducers<AppState>({
-   authReducer: AuthReducer
+   auth: AuthReducer
 });
 
 export default rootReducer;

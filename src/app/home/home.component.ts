@@ -6,8 +6,8 @@ import * as Redux from 'redux';
 import { UserService } from '../shared';
 
 import { AppStore } from '../app.store';
-import { Auth } from '../shared/models/auth.model';
-import { AppState, getAuthState, isLoggedIn } from '../app.reducer';
+import * as Auth from '../shared/models/auth.model';
+import { AppState } from '../app.reducer';
 
 
 @Component({
@@ -15,9 +15,8 @@ import { AppState, getAuthState, isLoggedIn } from '../app.reducer';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent /*implements OnInit*/ {
+export class HomeComponent implements OnInit {
   isLoggedIn: boolean;
-  //isLoggedIn: Auth;
 
   constructor(
     @Inject(AppStore) private store: Redux.Store<AppState>,
@@ -27,35 +26,30 @@ export class HomeComponent /*implements OnInit*/ {
     console.log("HomeComponent constructor: called");
 
     store.subscribe(() => this.updateState());
-    //this.updateState();
   }
 
   updateState() {
     console.log("updateState: called");
 
     const state = this.store.getState();
-    //this.isLoggedIn = isLoggedIn(state);
+    //this.isLoggedIn = Auth.isLoggedIn(state);
 
-    console.log(isLoggedIn);
+    if (this.isLoggedIn) {
+      console.log("authenticated");
+    } else {
+      console.log("not authenticated")
+    }
+
+    //console.log(Auth.isLoggedIn(state));
   }
 
-  // ngOnInit() {
-  //   this.userService.isAuthenticated.subscribe(
-  //     (authenticated) => {
-  //       this.isAuthenticated = authenticated;
-  //
-  //       // set the article list accordingly
-  //       if (authenticated) {
-  //         console.log("authenticated");
-  //       } else {
-  //         console.log("not authenticated")
-  //       }
-  //     }
-  //   );
-  // }
+  ngOnInit() {
+    console.log("HomeComponent ngOnInit: called");
+    this.store.dispatch(Auth.refresh());
+  }
 
   login(loginForm) {
-    console.log(loginForm);
-    this.userService.login(loginForm);
+    console.log("HomeComponent loginForm: called");
+    this.store.dispatch(Auth.logIn(loginForm));
   }
 }

@@ -25,7 +25,7 @@ export class UserService {
   // Try to refresh the token, if holding a valid token already, this will provide
   // a refreshed token. Otherwise it should come back with an unathed 401 code.
   refresh() {
-    console.log("refresh: called");
+    console.log("UserService refresh: called");
 
     this.apiService.get('/refresh')
       .subscribe(
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   login(credentials) {
-    console.log("login: called");
+    console.log("UserService login: called");
 
      this.apiService.post('/login', credentials)
       .subscribe(
@@ -47,13 +47,13 @@ export class UserService {
   }
 
   setAuth(token: Token) {
-    console.log("setAuth: called");
+    console.log("UserService setAuth: called");
     // this.currentUserSubject.next(user);
     // this.isAuthenticatedSubject.next(true);
   }
 
   purgeAuth() {
-    console.log("purgeAuth: called");
+    console.log("UserService purgeAuth: called");
     //this.currentUserSubject.next(new User());
     //this.isAuthenticatedSubject.next(false);
   }

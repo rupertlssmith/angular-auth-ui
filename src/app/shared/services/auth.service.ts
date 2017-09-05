@@ -10,7 +10,7 @@ import { ApiService } from './api.service';
 import { Token } from '../models/auth.model';
 
 @Injectable()
-export class UserService {
+export class AuthService {
   // private currentUserSubject = new BehaviorSubject<User>(new User());
   // public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
   //
@@ -25,7 +25,7 @@ export class UserService {
   // Try to refresh the token, if holding a valid token already, this will provide
   // a refreshed token. Otherwise it should come back with an unathed 401 code.
   refresh() {
-    console.log("UserService refresh: called");
+    console.log("AuthService refresh: called");
 
     this.apiService.get('/refresh')
       .subscribe(
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   login(credentials) {
-    console.log("UserService login: called");
+    console.log("AuthService login: called");
 
      this.apiService.post('/login', credentials)
       .subscribe(
@@ -47,13 +47,13 @@ export class UserService {
   }
 
   setAuth(token: Token) {
-    console.log("UserService setAuth: called");
+    console.log("AuthService setAuth: called");
     // this.currentUserSubject.next(user);
     // this.isAuthenticatedSubject.next(true);
   }
 
   purgeAuth() {
-    console.log("UserService purgeAuth: called");
+    console.log("AuthService purgeAuth: called");
     //this.currentUserSubject.next(new User());
     //this.isAuthenticatedSubject.next(false);
   }

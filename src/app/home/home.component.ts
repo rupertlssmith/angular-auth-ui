@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { MdlTextFieldComponent } from '@angular-mdl/core';
 import * as Redux from 'redux';
 
-import { UserService } from '../shared';
-
 import { AppStore } from '../app.store';
 import * as Auth from '../shared/models/auth.model';
 import { AppState } from '../app.reducer';
@@ -21,7 +19,6 @@ export class HomeComponent implements OnInit {
   constructor(
     @Inject(AppStore) private store: Redux.Store<AppState>,
     private router: Router,
-    private userService: UserService
   ) {
     console.log("HomeComponent constructor: called");
 

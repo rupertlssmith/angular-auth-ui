@@ -10,7 +10,7 @@ import {
   FooterComponent,
   HeaderComponent,
   SharedModule,
-  UserService
+  AuthService
 } from './shared';
 
 import {  AppStore,  appStoreProviders} from './app.store';
@@ -31,7 +31,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
   ],
   providers: [
     ApiService,
-    UserService,
+    AuthService,
     appStoreProviders
   ],
   bootstrap: [AppComponent]

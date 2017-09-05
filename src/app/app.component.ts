@@ -4,8 +4,6 @@ import * as Redux from 'redux';
 import { AppStore } from './app.store';
 import { AppState } from './app.reducer';
 
-import { UserService } from './shared';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
@@ -13,7 +11,6 @@ import { UserService } from './shared';
 export class AppComponent implements OnInit {
   constructor(
     @Inject(AppStore) private store: Redux.Store<AppState>,
-    private userService: UserService
   ) {
     console.log("AppComponent constructor: called")
   }

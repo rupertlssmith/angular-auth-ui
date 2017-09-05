@@ -14,9 +14,11 @@ export class AppComponent implements OnInit {
   constructor(
     @Inject(AppStore) private store: Redux.Store<AppState>,
     private userService: UserService
-  ) { }
+  ) {
+    console.log("AppComponent constructor: called")
+  }
 
   ngOnInit() {
-    this.userService.refresh();
+    //this.userService.refresh();
   }
 }

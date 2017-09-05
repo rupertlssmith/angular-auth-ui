@@ -1,4 +1,5 @@
 import { Action, ActionCreator } from 'redux';
+import { createSelector } from 'reselect';
 
 // The Auth state.
 
@@ -54,6 +55,15 @@ const init: Auth = {
   logoutLocation: "",
   logonAttempted: false
 };
+
+// Selector functions on the model.
+
+export const getAuthState = (state): Auth => state.authState;
+
+export const isLoggedIn = (state): Auth => state.authState.loggedIn;
+// createSelector(
+//  getAuthState,
+//  (state: AuthState) => state.loggedIn);
 
 // Actions that can update the state.
 

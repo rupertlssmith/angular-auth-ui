@@ -1,5 +1,7 @@
 import { Reducer, combineReducers } from 'redux';
+
 import { Auth, AuthReducer } from './shared/models/auth.model';
+export * from './shared/models/auth.model';
 
 export interface AppState {
    auth: Auth;

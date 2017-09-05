@@ -9,6 +9,8 @@ const devtools: StoreEnhancer<AppState> =
     window['devToolsExtension']() : f => f;
 
 export function createAppStore(): Store<AppState> {
+  console.log("createAppStore: called");
+  
   return createStore<AppState>(
     reducer,
     compose(devtools)

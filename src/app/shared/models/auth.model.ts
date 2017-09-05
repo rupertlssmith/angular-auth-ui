@@ -77,7 +77,9 @@ export const notAuthed: ActionCreator<NotAuthedAction> =
   });
 
 export const NEW_TOKEN = 'New Token'
-export interface NewTokenAction extends Action { }
+export interface NewTokenAction extends Action {
+  token: string
+}
 export const newToken: ActionCreator<NewTokenAction> =
   (token) => ({
     type: NEW_TOKEN,
@@ -94,8 +96,29 @@ export const AuthReducer =
       case NOT_AUTHED:
         return state;
       case NEW_TOKEN:
-        return state;
+        const token = (<NewTokenAction>action).token;
+        const parsedToken = parseJwt(token);
+        
+        console.log(parsedToken);
+
+        return {
+          ...state,
+          token: token,
+          decodedToken: parsedToken,
+          authState : {
+            ...state.authState,
+            loggedIn : true,
+            permissions: parsedToken.scopes
+          }
+        }
       default:
         return state;
     }
   };
+
+
+function parseJwt(token: string): Token {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};
